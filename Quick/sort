@@ -1,0 +1,60 @@
+public class HelloWorld {
+    public static void Main(string[] args) {
+    int[] arr={5, 3, 8, 1, 2};
+    Console.WriteLine("Before Sorting:");
+
+    for(int i=0;i<arr.Length;i++){
+        Console.Write(arr[i]+" ");    
+    }
+         Console.WriteLine("\nAfter Sorting:");
+ quicksort(arr,0,arr.Length-1);
+for(int i=0;i<arr.Length;i++){
+    Console.Write(arr[i]+" ");
+}
+    }
+    
+ public static void quicksort(int[]arr,int low,int high){
+     int s=low;
+     int e=high;
+     if(s>=e){
+         return;
+     }
+     int pivotIndex=partition(arr,s,e);
+     quicksort(arr,s,pivotIndex-1);
+     quicksort(arr,pivotIndex+1,e);
+ }
+public static int partition(int[]arr,int low,int high){
+    int s=low;
+    int e=high;
+    int pivotElement=arr[s];
+    int count=0;
+    for(int k=s+1;k<=e;k++){
+        if(arr[k]<pivotElement){
+            count++;
+        }
+    }
+    int currentPosition=s+count;
+    int temp=arr[currentPosition];
+    arr[currentPosition]=arr[s];
+    arr[s]=temp;
+    int i=s;
+    int j=e;
+    while(i<currentPosition && j>currentPosition){
+        while(i<currentPosition && arr[i]<pivotElement){
+            i++;
+        }
+        while(j<currentPosition && arr[j]>pivotElement){
+            j--;
+        }
+        if(i<currentPosition && j>currentPosition){
+            int temp2=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp2;
+            i++;
+            j--;
+        }
+    }
+    return currentPosition;
+    
+}
+    }
